@@ -18,13 +18,12 @@ test('Go to user URL', () => __awaiter(void 0, void 0, void 0, function* () {
     // temp code to go to initial 'grab url' page, move this to fixture later
     yield page.goto("https://steamyrobotlove.github.io", { waitUntil: 'load', timeout: 0 });
     const input = yield page.locator("input", { name: "text" });
-    const url = "https://" + (yield input.inputValue());
+    const url = "https://qa-nextcar.rapp.com/tear-sheets/next-car/toyota/sales-conversion/sc-vehicles-preview-prius/?FT_V1=2024~prius";
+    // Uncomment for textbox testing
+    // const url: string = "https://" + await input.inputValue();
     yield input.fill(url);
     const button = yield page.getByRole("button", { name: "submit" });
     yield button.click();
-    console.log(url);
     yield page.goto(url, { waitUntil: 'load', timeout: 0 });
-    const title = yield page.title();
-    console.log(title);
-    yield browser.close();
+    return page;
 }));

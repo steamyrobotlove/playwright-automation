@@ -10,18 +10,17 @@ test('Go to user URL', async () => {
     await page.goto("https://steamyrobotlove.github.io", { waitUntil: 'load', timeout: 0 });
 
     const input = await page.locator("input", { name: "text" });
-    const url: string = "https://" + await input.inputValue();
+    const url: string = 
+        "https://qa-nextcar.rapp.com/tear-sheets/next-car/toyota/sales-conversion/sc-vehicles-preview-prius/?FT_V1=2024~prius";
+    // Uncomment for textbox testing
+    // const url: string = "https://" + await input.inputValue();
 
     await input.fill(url);
 
     const button = await page.getByRole("button", { name: "submit" });
     await button.click();
-    console.log(url);
 
     await page.goto(url, { waitUntil: 'load', timeout: 0 });
 
-    const title = await page.title();
-    console.log(title);
-
-    await browser.close();
+    return page;
 });
