@@ -9,48 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const { chromium } = require('playwright');
-const path = require('path');
+// @ts-ignore
 const { test, expect } = require('@playwright/test');
-test('Prompt user for URL', () => __awaiter(void 0, void 0, void 0, function* () {
+// @ts-ignore
+test('Go to user URL', () => __awaiter(void 0, void 0, void 0, function* () {
     const browser = yield chromium.launch();
     const page = yield browser.newPage();
-    const filePath = path.join(__dirname, '../../index.html');
-    yield page.goto(filePath, { waitUntil: 'load', timeout: 0 });
-    const url = yield page.evaluate(() => {
-        return new Promise((resolve) => {
-            const form = document.querySelector('#urlForm');
-            const urlInput = document.querySelector('#urlInput');
-            if (!form || !urlInput) {
-                console.log('No form or input field found.');
-                return;
-            }
-            form.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const url = urlInput.value;
-                resolve(url);
-            });
-        });
-        // @ts-ignore
-    }).catch(error => {
-        console.error('Error: ', error.message);
-        return null;
-    });
-    if (url) {
-        console.log('Entered URL: ', url);
-    }
-    else {
-        console.log('No url entered.');
-    }
+    // temp code to go to initial 'grab url' page, move this to fixture later
+    yield page.goto("https://steamyrobotlove.github.io", { waitUntil: 'load', timeout: 0 });
+    const input = yield page.locator("input", { name: "text" });
+    const url = "https://" + (yield input.inputValue());
+    yield input.fill(url);
+    const button = yield page.getByRole("button", { name: "submit" });
+    yield button.click();
+    console.log(url);
+    yield page.goto(url, { waitUntil: 'load', timeout: 0 });
+    const title = yield page.title();
+    console.log(title);
     yield browser.close();
 }));
-// const { expect } = require('chai');
-// @ts-ignore
-// const { test, expect } = require('../modules/modules');
-// test("target search field", async ({ webApp }: { webApp:any }) => {
-//     try {
-//         const title = await expect(webApp.getByTitle("Search")).toBeVisible();
-//         console.log(title);
-//     } catch (err) {
-//         console.trace(err);
-//     }
-// });
