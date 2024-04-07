@@ -22,3 +22,4 @@ const test_1 = require("@playwright/test");
     // Expects page to have a heading with the name of Installation.
     yield (0, test_1.expect)(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 }));
+//# sourceMappingURL=example.spec.js.map

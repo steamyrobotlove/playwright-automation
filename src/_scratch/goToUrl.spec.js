@@ -10,20 +10,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const { chromium } = require('playwright');
 // @ts-ignore
-const { test, expect } = require('@playwright/test');
+const { test, expect } = require('../modules/modules');
 // @ts-ignore
 test('Go to user URL', () => __awaiter(void 0, void 0, void 0, function* () {
     const browser = yield chromium.launch();
     const page = yield browser.newPage();
     // temp code to go to initial 'grab url' page, move this to fixture later
-    yield page.goto("https://steamyrobotlove.github.io", { waitUntil: 'load', timeout: 0 });
-    const input = yield page.locator("input", { name: "text" });
-    const url = "https://qa-nextcar.rapp.com/tear-sheets/next-car/toyota/sales-conversion/sc-vehicles-preview-prius/?FT_V1=2024~prius";
-    // Uncomment for textbox testing
+    // Comment out when testing textbox
+    yield page.goto("https://qa-nextcar.rapp.com/tear-sheets/next-car/toyota/sales-conversion/sc-vehicles-preview-prius/?FT_V1=2024~prius", { waitUntil: 'load', timeout: 0 });
+    // Uncomment to test textbox
+    // await page.goto('https://steamyrobotlove.github.io');
+    // const input = await page.locator("input", { name: "text" });
+    // const url: string = "https://" + input;
     // const url: string = "https://" + await input.inputValue();
-    yield input.fill(url);
-    const button = yield page.getByRole("button", { name: "submit" });
-    yield button.click();
-    yield page.goto(url, { waitUntil: 'load', timeout: 0 });
+    // await input.fill(url);
+    // const button = await page.getByRole("button", { name: "submit" });
+    // await button.click();
+    // await page.goto(url, { waitUntil: 'load', timeout: 0 });
     return page;
 }));
+//# sourceMappingURL=goToUrl.spec.js.map
