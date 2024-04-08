@@ -60,4 +60,19 @@ exports.test = test.extend({
         });
         await use(imgHrefs);
     },
+
+    aTagsNoRedirectTargets: async ({ getUrl }, use) => {
+        const anchorTargets = await getUrl.$$eval('a',(aTags) => {
+            let targets = [];
+            for (let i = 0; i < aTags.length; i++) {
+                const target = aTags[i].getAttribute('target');
+                if (target) {
+                    targets.push(target);
+                }
+            }
+            return targets;
+        });
+        await use(anchorTargets);
+    },
+
 });
