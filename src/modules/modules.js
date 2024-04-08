@@ -1,3 +1,4 @@
+const { playwright } = require('playwright');
 const { test, expect } = require('@playwright/test');
 
 exports.expect = expect;
