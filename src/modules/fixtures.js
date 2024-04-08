@@ -1,4 +1,4 @@
-const { playwright } = require('playwright');
+// const { playwright } = require('playwright');
 const { test, expect } = require('@playwright/test');
 
 exports.expect = expect;
@@ -48,7 +48,6 @@ exports.test = test.extend({
                 continue;
             }
         }
-        console.log(urls);
         await use(urls);
     },
 
