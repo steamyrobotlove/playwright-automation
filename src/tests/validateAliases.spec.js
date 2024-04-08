@@ -1,4 +1,4 @@
-const { test, expect } = require('../modules/fixtures');
+const { test, expect } = require('../fixtures/fixtures');
 
 test('Validate aliases', async ({ aTagsNoRedirectAliases }) => {
     const aliases = Object.values(aTagsNoRedirectAliases);

@@ -1,4 +1,4 @@
-const { test, expect } = require('../modules/fixtures');
+const { test, expect } = require('../fixtures/fixtures');
 
 test('Validate target attributes', async ({ aTagsNoRedirectHrefs, aTagsNoRedirectTargets }) => {
     const hrefs = Object.values(aTagsNoRedirectHrefs);
