@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const { chromium } = require('playwright');
 // @ts-ignore
-const { test, expect } = require('../modules/modules');
+const { test, expect } = require('../../modules/modules');
 // @ts-ignore
 test('Go to user URL', () => __awaiter(void 0, void 0, void 0, function* () {
     const browser = yield chromium.launch();

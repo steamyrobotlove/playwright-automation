@@ -7,13 +7,27 @@ exports.test = test.extend({
         await use(page);
     },
 
-    aTagsNoRedirect: async ({ getUrl }, use) => {
-        const anchorLinks = await getUrl.evaluate(() => {
-            const tags = document.querySelectorAll('a');
-            const hrefs = Array.from(tags).map(a => a.href);
-            return hrefs
+    aTagsNoRedirectHrefs: async ({ getUrl }, use) => {
+        const anchorHrefs = await getUrl.evaluate(() => {
+            const aTags = document.querySelectorAll('a');
+            const hrefs = Array.from(aTags).map(a => a.href);
+            return hrefs;
         });
-        await use(anchorLinks);
+        await use(anchorHrefs);
+    },
+
+    aTagsNoRedirectAliases: async ({ getUrl }, use) => {
+        const anchorAliases = await getUrl.$$eval('a',(aTags) => {
+            let aliases = [];
+            for (let i = 0; i < aTags.length; i++) {
+                const alias = aTags[i].getAttribute('alias');
+                if (alias) {
+                    aliases.push(alias);
+                }
+            }
+            return aliases;
+        });
+        await use(anchorAliases);
     },
 
     aTagsRedirect: async ({ getUrl }, use) => {
