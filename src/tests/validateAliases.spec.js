@@ -1,6 +1,6 @@
 const { test, expect } = require('../modules/fixtures');
 
-test('Get aliases', async ({ aTagsNoRedirectAliases }) => {
+test('Validate aliases', async ({ aTagsNoRedirectAliases }) => {
     const aliases = Object.values(aTagsNoRedirectAliases);
     for (let alias of aliases) {
         const charToCount = "_";
