@@ -1,5 +1,5 @@
 const { playwright } = require('playwright');
-const { test, expect } = require('../modules/modules');
+const { test, expect } = require('../modules/fixtures');
 
 test('Validate Link Responses', async ({ page, aTagsNoRedirectHrefs }) => {
     const hrefs = Object.values(aTagsNoRedirectHrefs);
