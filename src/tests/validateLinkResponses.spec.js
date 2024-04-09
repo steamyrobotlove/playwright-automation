@@ -7,9 +7,9 @@ test('Validate Link Responses', async ({ page, aTagsNoRedirectHrefs }) => {
         if (href && !href == "") {
             const response = await page.goto(href, { waitUntil: 'load', timeout: 0 });
             const status = response.status();
-            console.log(`Status of ${href} is ${status}`);
-        } else {
-            console.log(`Response of ${href} was weird`);
+            // this is not working, figure out why
+            const result = status == 200 ? `Status of ${href} is ${status}` : `Status of ${href} was weird: ${status}`;
+            console.log(result);
         }
     }
 });
