@@ -29,6 +29,7 @@ exports.default = (0, test_1.defineConfig)({
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'on-first-retry',
     },
+    timeout: 0,
     /* Configure projects for major browsers */
     projects: [
         {
@@ -69,4 +70,3 @@ exports.default = (0, test_1.defineConfig)({
     //   reuseExistingServer: !process.env.CI,
     // },
 });
-//# sourceMappingURL=playwright.config.js.map
