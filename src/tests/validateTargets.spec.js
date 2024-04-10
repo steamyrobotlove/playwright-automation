@@ -1,7 +1,7 @@
 const { test, expect } = require('../fixtures/fixtures');
 
-test('Validate target attributes', async ({ aTagsNoRedirectHrefs, aTagsNoRedirectTargets }) => {
-    const hrefs = Object.values(aTagsNoRedirectHrefs);
+test('Validate target attributes', async ({ aTagsHrefs, aTagsNoRedirectTargets }) => {
+    const hrefs = Object.values(aTagsHrefs);
     const targets = Object.values(aTagsNoRedirectTargets);
 
     // Remove empty a tag from hrefs

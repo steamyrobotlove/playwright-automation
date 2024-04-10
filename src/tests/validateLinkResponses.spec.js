@@ -1,8 +1,7 @@
-const { playwright } = require('playwright');
 const { test, expect } = require('../fixtures/fixtures');
 
-test('Validate Link Responses', async ({ page, aTagsNoRedirectHrefs }) => {
-    const hrefs = Object.values(aTagsNoRedirectHrefs);
+test('Validate Link Responses', async ({ page, aTagsHrefs }) => {
+    const hrefs = Object.values(aTagsHrefs);
     for (let href of hrefs) {
         if (href && !href == "") {
             const response = await page.goto(href, { waitUntil: 'load', timeout: 0 });
