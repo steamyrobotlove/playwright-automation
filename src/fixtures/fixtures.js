@@ -8,15 +8,15 @@ exports.test = test.extend({
         // tearsheet link
         await page.goto('https://qa-nextcar.rapp.com/tear-sheets/next-car/toyota/sales-conversion/sc-vehicles-preview-prius/?FT_V1=2024~prius', { waitUntil: 'load', timeout: 0 });
         
-        // webview link for current email, 4/8/2024, change if webview is no longer valid
+        // webview link for current email, 4/8/2024, change if webview is no longer valid (or add if not here, any functional webview link will do)
         // await page.goto(
-        //     'https://view.e.toyota.com/?qs=8f1d8ef866c577d78a5197a7c3acf4de24453341bf916e8dbef24059e3e48d91507231ef188545b6e6dcfc7b85a7694195fe28019c684163054603a50cf4f9f92b4507f768ff60d04c1727c53962e078'
+        //     ''
         //     );
         await use(page);
     },
 
-    // Begin anchor links with no redirects (tearsheets/PLs)
-    aTagsNoRedirectHrefs: async ({ getUrl }, use) => {
+    // General anchor link hrefs, used for all tearsheets/PLs/emails
+    aTagsHrefs: async ({ getUrl }, use) => {
         const anchorHrefs = await getUrl.evaluate(() => {
             const aTags = document.querySelectorAll('a');
             const hrefs = Array.from(aTags).map(a => a.href);
@@ -25,6 +25,7 @@ exports.test = test.extend({
         await use(anchorHrefs);
     },
 
+    // Begin anchor link non-redirect functions (for tearsheets/PLs)
     aTagsNoRedirectAliases: async ({ getUrl }, use) => {
         const anchorAliases = await getUrl.$$eval('a',(aTags) => {
             let aliases = [];
