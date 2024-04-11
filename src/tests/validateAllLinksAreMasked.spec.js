@@ -13,7 +13,7 @@ test('Verify all links are masked', async ({ page, aTagsHrefs }) => {
         }
     }
 
-    let count = hrefs.length();
+    // let count = hrefs.length();
 
     // let result = {
     //     value: "",
