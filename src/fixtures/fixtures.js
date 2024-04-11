@@ -5,13 +5,10 @@ exports.expect = expect;
 exports.test = test.extend({
     // Get static URL/browser page instance, change to dynamic later
     getUrl: async ({ page }, use) => {
-        // tearsheet link
-        // await page.goto('https://qa-nextcar.rapp.com/tear-sheets/next-car/toyota/sales-conversion/sc-vehicles-preview-prius/?FT_V1=2024~prius', { waitUntil: 'load', timeout: 0 });
-        
-        // webview link for current email, 4/8/2024, change if webview is no longer valid (or add if not here, any functional webview link will do)
         await page.goto(
-            'https://view.e.toyota.com/?qs=ae79f61d8912684410afb4010f090f35e7f98444fa3156f63ab02b745465b60b1efd129f3f68aaf74f629a0191eac00c637682cd1e5f607d6f3b759587971fd0f7490cebbf620ed3b66a2c4b40993ebf'
-            );
+            // uncomment ONE OF THESE URLs; comment out the rest; delete all links before merging to Github (unnecessary if merging to Azure)
+            // toyota tearsheet link just for testing
+            'https://www.google.com', { waitUntil: 'load', timeout: 0 });
         await use(page);
     },
 
@@ -54,16 +51,13 @@ exports.test = test.extend({
         await use(anchorTargets);
     },
 
-    // Begin anchor links with redirects (ATEST/CTEST/VTEST/PROD TEST/etc.)
-    aTagsRedirectHrefs: async ({ getUrl }, use) => {
+    // Begin anchor links with redirects, following redirect journey to final destination (ATEST/CTEST/VTEST/PROD TEST/etc.)
+    aTagsRedirectHrefs: async ({ getUrl, aTagsHrefs }, use) => {
+        
         let urls = [];
         
-        // Get all hrefs from atags
-        const anchorLinks = await getUrl.evaluate(() => {
-            const tags = document.querySelectorAll('a');
-            const hrefs = Array.from(tags).map(a => a.href);
-            return hrefs;
-        });
+        // Create array of hrefs from aTagsHrefs fixture
+        const anchorLinks = Object.values(aTagsHrefs);
 
         // Navigate to hrefs, get final destination urls in urls array
         for (const href in anchorLinks) {
