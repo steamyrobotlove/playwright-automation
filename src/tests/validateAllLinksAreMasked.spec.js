@@ -13,14 +13,6 @@ test('Verify all links are masked', async ({ page, aTagsHrefs }) => {
         }
     }
 
-    // let count = hrefs.length();
-
-    // let result = {
-    //     value: "",
-    //     item: "",
-    //     itemValue: ""
-    // };
-
     for (let href of hrefs) {
         if (href && !href == '') {
             if (href.includes('click.e.toyota.com')) {
