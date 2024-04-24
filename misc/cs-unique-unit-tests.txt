@@ -1,0 +1,107 @@
+//All unit tests wrapped in an if else//
+//Unique unit tests not using shared data (to my knowledge)//
+
+GetHeaderLogo(webViewHTML);
+IsLeaseDateValid(message_id, webViewHTML);
+IsLeaseDateMonthsOut(message_id, 11, webViewHTML);
+IsLeaseDateMonthsOut(message_id, 8, webViewHTML);
+IsLeaseDateWeeeksOut(message_id, 14, webViewHTML);
+VerbageCheckNoOffern35(webViewHTML);
+ZipcodeCheckNOffer35(webViewHTML);
+HybridGasLinkVerification(decodedUrl, webViewHTML);
+HasMpg(webViewHTML, decodedUrl);
+InteriorTour(webViewHTML, decodedUrl);
+IsHeroImagePopulated(webViewHTML);
+IsKeylinePresent(webViewHTML, decodedUrl);
+IsVinDisplayed(webViewHTML);
+IsOutfittersModulePresent(webViewHTML);
+IsDealerModulePresent(webViewHTML);
+IsTimsModulePresent(webViewHTML);
+ReasonsToBelieveSafety(webViewHTML, decodedUrl);
+ModuleCount(webViewHTML, decodedUrl, category);
+AudioMultiMediaHero(webViewHTML, decodedUrl);
+CampaignHasBlackBg(webViewHTML);
+CampaignHasWhiteBg(webViewHTML);
+UniversalImageDisclaimer(webViewHTML, decodedUrl, rootUrl);
+OfferDisclaimerExists(webViewHTML, campaign, subject);
+DisclaimersArePopulatedInOrder(webViewHTML);
+AllAccessoryPageLinks(webViewHTML, decodedUrl);
+SuperscriptsAreCorrectlyPopulated(webViewHTML);
+ContentBackground(webViewHTML, decodedUrl);
+OWV1NameInHeroModule(webViewHTML, decodedUrl);
+HeroVehicleFeaturesAreShown(webViewHTML, decodedUrl);
+NewOwnerNewsLetterTitle(webViewHTML, decodedUrl);
+WelcomeModuleIsInRightPosition(webViewHTML, decodedUrl);
+BuildandPriceModuleExists(webViewHTML);
+NewsletterAccessoriesModuleExists(webViewHTML, decodedUrl);
+FamilyModuleOrder(webViewHTML, decodedUrl);
+SubNavModuleIsPresent(webViewHTML, decodedUrl);
+NewsletterPreferencesModuleIsPresent(webViewHTML, decodedUrl);
+FamilyModuleIsPresent(webViewHTML);
+OlympicsLogoIsPresent(webViewHTML);
+PreheaderText(webViewHTML);
+TertiaryModuleIsPresent(webViewHTML);
+BackgroundImageAndApiHero(webViewHTML);
+SameHeadlineForAllVehicles(webViewHTML);
+RightHeroBgIsPopulated(webViewHTML, decodedUrl);
+VehiclesHaveMpgFlag(webViewHTML);
+ShowUniqueVehicles(webViewHTML, 11);
+ElectrifiedModule(webViewHTML);
+DeterminerBeforeVehicleName(webViewHTML, decodedUrl);
+OfferOrNoOfferVerbaigeExists(webViewHTML, decodedUrl);
+CorrectSubjectLine(decodedUrl, subjectLine, webViewHTML);
+ExpressMaintenanceOrExpertsAtYourServiceModule(webViewHTML, decodedUrl);
+PreheaderAndDealerNamePresent(webViewHTML);
+AllLinksAreMasked(message_id, subjectLine, product);
+ZipCodeIsInHdbrTable(message_id, webViewHTML);
+ImageEnvironment(webViewHTML);
+TitleElementText(webViewHTML, decodedUrl);
+TrackingPixels(webViewHTML, decodedUrl);
+TelephoneNumberFormat(webViewHTML, decodedUrl);
+URLTargetValue(webViewHTML, decodedUrl);
+WacTrackingParameters(webViewHTML, decodedUrl);
+SpellChecker(webViewHTML,rootUrl, azureFunctionRootDirectory);
+EitherModuleExists(webViewHTML, "National Promotions module check", "Spring Event module", "Service by Lexus module", "Summer Event module", "Spring 2022 module", "Fall 2021 module", new List<string> { "Lexus Spring", "Service Event", "$100 OFF a set of 4 new tires", "Up to $50 OFF a set of brake pads" }, new List<string> { "service by lexus", "experience world-class craftsmanship", "and world-renowned care" }, new List<string> { "Lexus Summer", "Service Event", "$50 OFF a Lexus battery", "COMPLIMENTARY multi-point inspection" }, new List<string> { "$100 OFF A SET OF 4 NEW TIRES", "When you purchase an eligible set of 4 new tires or $50 off two eligible tires between 3/23 and 04/30/2022.", "SHOP TIRES" }, new List<string> { "$100 OFF A SET OF 4 NEW TIRES", "When you purchase an eligible set of 4 new tires or $50 off 2 eligible tires between 9/22 and 10/31.", "SHOP TIRES" });
+RightEngageHeroExists(webViewHTML, decodedUrl, campaign);
+AppFooter(webViewHTML, decodedUrl);
+
+//These extra supplementary unit test scripts were written within the unit test source block//
+//var [varName] leads to test function in ValidateNonLinkUnitTest_TOY.cs//
+if (unit_test == "Accessories count")
+{
+    var taskAccessory = AccessoriesCount(webViewHTML, 2);
+    taskAccessory.Wait();
+    (bool value, string item, string itemValue) accessory = taskAccessory.Result;
+    return accessory;
+}
+if (unit_test == "All survey links lead to the same target")
+{
+    var taskSurvey = AllSurveyLinksTarget(webViewHTML);
+    taskSurvey.Wait();
+    (bool value, string item, string itemValue) survey = taskSurvey.Result;
+    return survey;
+}
+if (unit_test == "Hero images are scrolling")
+{
+    var taskHeros = HeroImgesAreScrolling(webViewHTML);
+    taskHeros.Wait();
+    (bool value, string item, string itemValue) heros = taskHeros.Result;
+    return heros;
+}
+if (unit_test == "Has the correct amount of vehicles")
+{
+    var vehicles = HasCorrectAmountOfVehicles(webViewHTML, decodedUrl, campaign);
+    vehicles.Wait();
+    (bool value, string item, string itemValue) res = vehicles.Result;
+    return res;
+}
+if (unit_test == "Hero background is a gif")
+{
+    var result = HeroBackgroundIsGif(webViewHTML);
+    result.Wait();
+    (bool value, string item, string itemValue) res = result.Result;
+    return res;
+}
+
+/* final else */ 
+return (value: false, item: "", itemValue: "");

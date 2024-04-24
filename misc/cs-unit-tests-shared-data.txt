@@ -1,0 +1,91 @@
+            if (unit_test == "Accessories count")
+            {
+                var taskAccessory = AccessoriesCount(webViewHTML, 2);
+                taskAccessory.Wait();
+                (bool value, string item, string itemValue) accessory = taskAccessory.Result;
+                return accessory;
+            }
+
+            if (unit_test == "All survey links lead to the same target")
+            {
+                var taskSurvey = AllSurveyLinksTarget(webViewHTML);
+                taskSurvey.Wait();
+                (bool value, string item, string itemValue) survey = taskSurvey.Result;
+                return survey;
+            }
+
+            if (unit_test == "Hero images are scrolling")
+            {
+                var taskHeros = HeroImgesAreScrolling(webViewHTML);
+                taskHeros.Wait();
+                (bool value, string item, string itemValue) heros = taskHeros.Result;
+                return heros;
+            }
+
+            if (unit_test == "Has the correct amount of vehicles")
+            {
+                var vehicles = HasCorrectAmountOfVehicles(webViewHTML, decodedUrl, campaign);
+                vehicles.Wait();
+                (bool value, string item, string itemValue) res = vehicles.Result;
+                return res;
+            }
+
+            if (unit_test == "Hero background is a gif")
+            {
+                var result = HeroBackgroundIsGif(webViewHTML);
+                result.Wait();
+                (bool value, string item, string itemValue) res = result.Result;
+                return res;
+            }
+
+                return LogoExistsWithRightLink(webViewHTML, "https://www.toyota.com/");
+                return LogoExistsWithRightLink(webViewHTML, "https://drivers.lexus.com/lexusdrivers/service");
+
+                return IsContentAvailableGeneric(webViewHTML, "Welcome Service Center", "", "", "Find your servicing dealer");
+                return IsContentAvailableGeneric(webViewHTML, "Service Center", "", "", "Set up your service appointment with your local dealership.");
+                return IsContentAvailableGeneric(webViewHTML, "toyotcare disclaimer", "", "", "ToyotaCare covers normal factory scheduled maintenance for two years or 25,000 miles, whichever comes first. Certain models require a different maintenance schedule as described in their Maintenance Guide. 24-hour Roadside Assistance is also included for two years, unlimited mileage. Roadside Assistance does not include parts and fluids, except emergency fuel delivery. See Toyota dealer for details and exclusions. Valid only in the continental U.S.");
+                return IsContentAvailableGeneric(webViewHTML, "Flexfuel disclaimer", "", "", "Excludes those items listed in the Maintenance Guide under Special Operating Conditions. If the engine in this vehicle runs on E85 fuel more than 50 percent of the time, oil and filter changes are recommended every 2,500 miles. This is considered a Special Operating Condition. The additional oil changes are not covered under the no cost maintenance plan.");
+                return IsContentAvailableGeneric(webViewHTML, "Mirai specific road side assitance copy", "welcome-banner-bodycopy-wrapper", "td", "emergency fuel delivery", "not contain", "module content");
+                return IsContentAvailableGeneric(webViewHTML, "Mirai disclaimer", "", "", "ToyotaCare for Mirai covers normal factory scheduled maintenance for three years or 35,000 miles, whichever comes first. Certain models require a different maintenance schedule as described in their Maintenance Guide. 24-hour Roadside Assistance is also included for three years, unlimited mileage. Roadside Assistance does not include parts and fluids. Valid only through Authorized Mirai Fuel Cell Dealers. See an Authorized Mirai Fuel Cell Dealer for details and exclusions. Valid only in the continental U.S.");
+                return IsContentAvailableGeneric(webViewHTML, "Mirai specific services", "desktop-service-center-wrapper", "td", "", "contains", "module content", new List<string>() { "Rotate Tires", "Replace Cabin Air Filter", "Multi-Point Inspection", "Replace Fuel Cell Air Filter", "Inspect & Adjust Fluids", "Replace Ion Exchanger Element", "Inspect Fuel Cell System Components", "Toyota Genuine Parts" }, "", "p");
+                return IsContentAvailableGeneric(webViewHTML, "Prius or prius prime specific road side assistance copy", "welcome-banner-bodycopy-wrapper", "td", "3 years", "contains", "module content");
+                return IsContentAvailableGeneric(webViewHTML, "Prius or prius prime", "", "", "ToyotaCare for Prius and Prius Prime covers normal factory scheduled maintenance for two years or 25,000 miles, whichever comes first. Certain models require a different maintenance schedule as described in their Maintenance Guide. 24-hour Roadside Assistance is also included for three years, unlimited mileage. Roadside Assistance does not include parts and fluids, except emergency fuel delivery. See Toyota dealer for details and exclusions. Valid only in the continental U.S.");
+                return IsContentAvailableGeneric(webViewHTML, "Supra specific road side assistance copy", "welcome-banner-bodycopy-wrapper", "td", "tire service", "not contain", "module content");
+                return IsContentAvailableGeneric(webViewHTML, "(This unit test is always marked failed, since the expMaint flags are currently not set up correctly across all campaigns. It instead displays if the express maintenance, Experts at your service or none of these modules are being displayed) Express maintenance module", "", "", "We won't slow you down");
+                return IsContentAvailableGeneric(webViewHTML, "Coupon from AMP", "", "", "", "contains", "", new List<string> { "Toyota‑certified technicians", "are ready to provide exceptional service for" }, "", "", "");
+                return IsContentAvailableGeneric(webViewHTML, "(This unit test is always marked failed, since the expMaint flags are currently not set up correctly across all campaigns. It instead displays if the express maintenance, Experts at your service or none of these modules are being displayed) Experts at your service - Express Maintenance module", "", "", "Service done right, right now");
+                return IsContentAvailableGeneric(webViewHTML, "Toyota 86", "hero", "td", "Toyota 86");
+                return IsContentAvailableGeneric(webViewHTML, "Toyota C-HR", "hero", "td", "Toyota C-HR");
+                return IsContentAvailableGeneric(webViewHTML, "Experts at your service module", "", "", "Our Toyota-certified technicians use Toyota Genuine Parts and Accessories that are precision-engineered for your vehicle.");
+                return IsContentAvailableGeneric(webViewHTML, "OCPe Service Reminder Hero Minor", "hero", "td", "", "contains", "module content", new List<string>() { "Our experts are ready to help" }, "", "h2");
+                return IsContentAvailableGeneric(webViewHTML, "OCPe Service Reminder Hero Major", "hero", "td", "", "contains", "module content", new List<string>() { "Let us take care of your Toyota Scion" }, "", "h2");
+                return IsContentAvailableGeneric(webViewHTML, "A CTA in the hero module", "", "", "Schedule your service", "contains", "module content");
+                return IsContentAvailableGeneric(webViewHTML, "Schedule service CTA", "hero", "td", "Schedule service", "contains", "module content");
+                return IsContentAvailableGeneric(webViewHTML, "Service thank you declined service CTA in hero", "hero-sortable", "td", "Schedule service", "contains", "module content");
+                return IsContentAvailableGeneric(webViewHTML, "TY with first paid visit no CTA", "hero-sortable", "td", "Book a return visit", "not contain", "module content");
+                return IsContentAvailableGeneric(webViewHTML, "Coupon from AMP", "", "", "", "contains", "", new List<string> { ".00 OFF", "expires" }, "", "", "");
+                return IsContentAvailableGeneric(webViewHTML, "Dealer module exists", "", "", "", "contains", "", new List<string>() { "Get directions", "Service Department Hours", "View dealer website", "Some of our amenities:" }, "", "", "");
+                return IsContentAvailableGeneric(webViewHTML, "Headline: LET'S CONTINUE THE JOURNEY", "hero-headline-wrapper", "td", "LET'S CONTINUE THE JOURNEY", "contains", "module content", null, "", "", "");
+                return IsContentAvailableGeneric(webViewHTML, "The right body copy", "bodycopy-wrapper", "td", $"Congratulations on your {v1ModelYear} {v1Series}. As someone who is familiar with Lexus vehicles, you'll appreciate that we are committed to providing an experience as well-crafted as the vehicle you've chosen to drive. Sit back, relax and enjoy.", "contains", "module content", null, "", "", "");
+                return IsContentAvailableGeneric(webViewHTML, "Connect to more with Lexus Enform", "", "", "", "contains", "", new List<string> { "Connect to more with Lexus Enform", "Sign up, activate or manage your Lexus Enform services with the Lexus App." }, "", "", "");
+                return IsContentAvailableGeneric(webViewHTML, "CTA : Register today module", "hero-sortable-wrap", "td", "Register today", "contains", "multiple modules", null, "", "", "");
+                return IsContentAvailableGeneric(webViewHTML, "CTA : Learn more module", "hero-sortable-wrap", "td", "Learn more", "contains", "multiple modules", null, "", "", "");
+                return IsContentAvailableGeneric(webViewHTML, "All your benefits in one place module", "", "", "", "contains", "", new List<string> { "All your benefits in one place", "Experience Lexus ownership to its fullest with the convenient features and exclusive benefits that are available through Lexus Drivers and the Lexus App.", "Click or tap any of these icons to explore what Lexus Drivers has to offer.", "Resources:", "Owner Exclusives:", "Vehicle Specifications:", "How-To Guides:" }, "", "", "");
+                return IsContentAvailableGeneric(webViewHTML, "We're Here to Help module", "hero-sortable-wrap", "td", "We're Here to Help", "contains", "multiple modules", null, "", "", "");
+                return IsContentAvailableGeneric(webViewHTML, "Lexus transactional footer", "footer_wrap", "td", "This Lexus communication is intended for residents of the United States only.", "contains", "multiple modules", null, "", "", "");
+                return IsContentAvailableGeneric(webViewHTML, "The right body copy for Lexus new owner", "", "", "Welcome to Lexus, where you will enjoy world-class craftsmanship and vehicle care, as well as unparalleled personal attention. We are committed to ensuring your experience is nothing short of amazing.", "contains", "module content", null, "", "", "");
+                return IsContentAvailableGeneric(webViewHTML, "Connect to more with Lexus Enform", "hero-sortable-wrap", "td", "Connect to more with Lexus Enform", "contains", "multiple modules", null, "", "", "");
+                return IsContentAvailableGeneric(webViewHTML, "Welcome Hero : Content module", "hero-sortable-wrap", "td", "This is the start of something amazing", "contains", "multiple modules", null, "", "", "");
+
+                return GenericContentExists(webViewHTML, "Service center module", "desktop-service-center-wrapper", "td", "");
+                return GenericContentExists(webViewHTML, "Dealer name to the right of logo", "logo_wrap", "td", "p");
+
+                return SortableModuleElements(webViewHTML, new List<string>() { "bodycopy" }, 1);
+                return SortableModuleElementsWithValueMatch(obj);
+                return SortableModuleElementsWithValueMatch(obj);
+                return SortableModuleElementsWithValueMatch(obj);
+                return SortableModuleElements(webViewHTML, new List<string>() { "bodycopy" }, 0);
+                return SortableModuleElements(webViewHTML, new List<string> { "hero" }, 2);
+                return SortableModuleElements(webViewHTML, new List<string> { "hero" }, 2);
+                return SortableModuleElements(webViewHTML, new List<string>() { "hero", "cta", "bodycopy", "headline" }, 0);
+                return SortableModuleExactMatch(webViewHTML, "Unparalleled service module", new List<string>() { "Unparalleleded service", "We also strive to make every visit a pleasure for Lexus owners, with additional services, amenities and special touches wherever possible", "Learn More" }, 1);
