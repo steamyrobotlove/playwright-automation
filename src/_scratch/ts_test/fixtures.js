@@ -68,5 +68,13 @@ playwrightTest.extend({
         }
         yield use(urls);
     }),
+    imgTagsHrefs: ({ getUrl }, use) => __awaiter(void 0, void 0, void 0, function* () {
+        const imgHrefs = yield getUrl.evaluate(() => {
+            const tags = document.querySelectorAll('img');
+            const hrefs = Array.from(tags).map(img => img.src);
+            return hrefs;
+        });
+        yield use(imgHrefs);
+    }),
 });
 //# sourceMappingURL=fixtures.js.map

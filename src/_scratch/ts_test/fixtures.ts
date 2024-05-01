@@ -1,6 +1,6 @@
-import { TestExtensions } from '../_scratch/ts_test/interfaces';
+import { TestExtensions } from './interfaces';
 import { Page } from 'playwright';
-import { GetUrlFunction } from '../_scratch/ts_test/interfaces';
+import { GetUrlFunction } from './interfaces';
 // const { test, expect } = require('@playwright/test');
 
 const { test: playwrightTest, expect: playwrightExpect }: TestExtensions = require('@playwright/test');

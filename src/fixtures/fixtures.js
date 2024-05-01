@@ -1,32 +1,30 @@
-"use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-// const { test, expect } = require('@playwright/test');
-const { test: playwrightTest, expect: playwrightExpect } = require('@playwright/test');
-playwrightTest.extend({
-    getUrl: ({ page }, use) => __awaiter(void 0, void 0, void 0, function* () {
-        yield page.goto('https://www.google.com', { waitUntil: 'load', timeout: 0 });
-        yield use(page);
-    }),
+// const { playwright } = require('playwright');
+const { test, expect } = require('@playwright/test');
+
+exports.expect = expect;
+exports.test = test.extend({
+    // Get static URL/browser page instance, change to dynamic later
+    getUrl: async ({ page }, use) => {
+        await page.goto(
+            // uncomment ONE OF THESE URLs; comment out the rest; delete all links before merging to Github (unnecessary if merging to Azure)
+            // toyota tearsheet link just for testing
+            'https://www.google.com', { waitUntil: 'load', timeout: 0 });
+        await use(page);
+    },
+
     // General anchor link hrefs, used for all tearsheets/PLs/emails
-    aTagsHrefs: ({ getUrl }, use) => __awaiter(void 0, void 0, void 0, function* () {
-        const anchorHrefs = yield getUrl.evaluate(() => {
+    aTagsHrefs: async ({ getUrl }, use) => {
+        const anchorHrefs = await getUrl.evaluate(() => {
             const aTags = document.querySelectorAll('a');
             const hrefs = Array.from(aTags).map(a => a.href);
             return hrefs;
         });
-        yield use(anchorHrefs);
-    }),
-    aTagsNoRedirectAliases: ({ getUrl }, use) => __awaiter(void 0, void 0, void 0, function* () {
-        const anchorAliases = yield getUrl.$$eval('a', (aTags) => {
+        await use(anchorHrefs);
+    },
+
+    // Begin anchor link non-redirect functions (for tearsheets/PLs)
+    aTagsNoRedirectAliases: async ({ getUrl }, use) => {
+        const anchorAliases = await getUrl.$$eval('a',(aTags) => {
             let aliases = [];
             for (let i = 0; i < aTags.length; i++) {
                 const alias = aTags[i].getAttribute('alias');
@@ -36,10 +34,11 @@ playwrightTest.extend({
             }
             return aliases;
         });
-        yield use(anchorAliases);
-    }),
-    aTagsNoRedirectTargets: ({ getUrl }, use) => __awaiter(void 0, void 0, void 0, function* () {
-        const anchorTargets = yield getUrl.$$eval('a', (aTags) => {
+        await use(anchorAliases);
+    },
+
+    aTagsNoRedirectTargets: async ({ getUrl }, use) => {
+        const anchorTargets = await getUrl.$$eval('a',(aTags) => {
             let targets = [];
             for (let i = 0; i < aTags.length; i++) {
                 const target = aTags[i].getAttribute('target');
@@ -49,32 +48,37 @@ playwrightTest.extend({
             }
             return targets;
         });
-        yield use(anchorTargets);
-    }),
-    aTagsRedirectHrefs: ({ getUrl, aTagsHrefs }, use) => __awaiter(void 0, void 0, void 0, function* () {
+        await use(anchorTargets);
+    },
+
+    // Begin anchor links with redirects, following redirect journey to final destination (ATEST/CTEST/VTEST/PROD TEST/etc.)
+    aTagsRedirectHrefs: async ({ getUrl, aTagsHrefs }, use) => {
+        
         let urls = [];
+        
+        // Create array of hrefs from aTagsHrefs fixture
         const anchorLinks = Object.values(aTagsHrefs);
-        let page = Object.values(getUrl);
+
         // Navigate to hrefs, get final destination urls in urls array
         for (const href in anchorLinks) {
-            if (href && href != '') {
-                yield getUrl.goto(href);
-                const url = yield getUrl.url();
-                urls.push(url);
-            }
-            else {
+            if (!href == null && !href == '') {
+                await getUrl.goto(href, { waitUntil: 'load', timeout: 0 });
+                const url = getUrl.url();
+                await urls.push(url);
+            } else {
                 continue;
             }
         }
-        yield use(urls);
-    }),
-    imgTagsHrefs: ({ getUrl }, use) => __awaiter(void 0, void 0, void 0, function* () {
-        const imgHrefs = yield getUrl.evaluate(() => {
+        await use(urls);
+    },
+
+    // Begin img tags section
+    imgTagsHrefs: async ({ getUrl }, use) => {
+        const imgHrefs = await getUrl.evaluate(() => {
             const tags = document.querySelectorAll('img');
             const hrefs = Array.from(tags).map(img => img.src);
             return hrefs;
         });
-        yield use(imgHrefs);
-    }),
+        await use(imgHrefs);
+    },
 });
-//# sourceMappingURL=fixtures.js.map
