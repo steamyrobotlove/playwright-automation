@@ -1,7 +1,8 @@
-import { TestExtensions } from '../_scratch/ts_test/interfaces';
-const { test: playwrightTest, expect: playwrightExpect }: TestExtensions = require('@playwright/test');
+import { PrintImgTagHrefsFunction } from '../_scratch/ts_test/interfaces';
+// const { test: playwrightTest, expect: playwrightExpect }: TestExtensions = require('@playwright/test');
 const { test, expect } = require('../fixtures/fixtures');
 
-test('Get img tags', async ({ imgTagsHrefs }) => {
-    console.log(imgTagsHrefs);
+test('Get img tags', async ({ imgTagsHrefs }: { imgTagsHrefs: PrintImgTagHrefsFunction}) => {
+    const imgTags = Object.values(imgTagsHrefs);
+    console.log(imgTags);
 });
