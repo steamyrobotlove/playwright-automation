@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // const { test, expect } = require('@playwright/test');
+//test
 const { test: playwrightTest, expect: playwrightExpect } = require('@playwright/test');
 playwrightTest.extend({
     getUrl: ({ page }, use) => __awaiter(void 0, void 0, void 0, function* () {
@@ -75,6 +76,47 @@ playwrightTest.extend({
             return hrefs;
         });
         yield use(imgHrefs);
+    }),
+    // Begin inner text (copy) section
+    getPTagsInnerText: ({ getUrl }, use) => __awaiter(void 0, void 0, void 0, function* () {
+        const pTagsInnerText = yield getUrl.evaluate(() => {
+            const pTags = document.querySelectorAll('p');
+            const innerText = Array.from(pTags).map(p => p.innerText);
+            return innerText;
+        });
+        yield use(pTagsInnerText);
+    }),
+    getSpanTagsInnerText: ({ getUrl }, use) => __awaiter(void 0, void 0, void 0, function* () {
+        const spanTagsInnerText = yield getUrl.evaluate(() => {
+            const spanTags = document.querySelectorAll('span');
+            const innerText = Array.from(spanTags).map(sp => sp.innerText);
+            return innerText;
+        });
+        yield use(spanTagsInnerText);
+    }),
+    getATagsInnerText: ({ getUrl }, use) => __awaiter(void 0, void 0, void 0, function* () {
+        const aTagsInnerText = yield getUrl.evaluate(() => {
+            const aTags = document.querySelectorAll('a');
+            const innerText = Array.from(aTags).map(a => a.innerText);
+            return innerText;
+        });
+        yield use(aTagsInnerText);
+    }),
+    getStrongTagsInnerText: ({ getUrl }, use) => __awaiter(void 0, void 0, void 0, function* () {
+        const strongTagsInnerText = yield getUrl.evaluate(() => {
+            const strongTags = document.querySelectorAll('strong');
+            const innerText = Array.from(strongTags).map(st => st.innerText);
+            return innerText;
+        });
+        yield use(strongTagsInnerText);
+    }),
+    getListTagsInnerText: ({ getUrl }, use) => __awaiter(void 0, void 0, void 0, function* () {
+        const listTagsInnerText = yield getUrl.evaluate(() => {
+            const listTags = document.querySelectorAll('li');
+            const innerText = Array.from(listTags).map(li => li.innerText);
+            return innerText;
+        });
+        yield use(listTagsInnerText);
     }),
 });
 //# sourceMappingURL=fixtures.js.map

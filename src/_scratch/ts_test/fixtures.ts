@@ -2,7 +2,7 @@ import { TestExtensions } from './interfaces';
 import { Page } from 'playwright';
 import { GetUrlFunction } from './interfaces';
 // const { test, expect } = require('@playwright/test');
-
+//test
 const { test: playwrightTest, expect: playwrightExpect }: TestExtensions = require('@playwright/test');
 
 (playwrightTest as any).extend({
@@ -76,4 +76,50 @@ const { test: playwrightTest, expect: playwrightExpect }: TestExtensions = requi
         });
         await use(imgHrefs);
     },
+
+        // Begin inner text (copy) section
+        getPTagsInnerText: async ({ getUrl }: { getUrl: GetUrlFunction}, use: (string: string[]) => Promise<void>) => {
+            const pTagsInnerText = await getUrl.evaluate(() => {
+                    const pTags = document.querySelectorAll('p');
+                    const innerText = Array.from(pTags).map(p => p.innerText);
+                    return innerText
+                });
+                await use (pTagsInnerText);
+        },
+
+        getSpanTagsInnerText: async ({ getUrl }: { getUrl: GetUrlFunction}, use: (string: string[]) => Promise<void>) => {
+            const spanTagsInnerText = await getUrl.evaluate(() => {
+                    const spanTags = document.querySelectorAll('span');
+                    const innerText = Array.from(spanTags).map(sp => sp.innerText);
+                    return innerText
+                });
+                await use (spanTagsInnerText);
+        },
+    
+        getATagsInnerText: async ({ getUrl }: { getUrl: GetUrlFunction}, use: (string: string[]) => Promise<void>) => {
+            const aTagsInnerText = await getUrl.evaluate(() => {
+                    const aTags = document.querySelectorAll('a');
+                    const innerText = Array.from(aTags).map(a => a.innerText);
+                    return innerText
+                });
+                await use (aTagsInnerText);
+        },
+    
+        getStrongTagsInnerText: async ({ getUrl }: { getUrl: GetUrlFunction}, use: (string: string[]) => Promise<void>) => {
+            const strongTagsInnerText = await getUrl.evaluate(() => {
+                    const strongTags = document.querySelectorAll('strong');
+                    const innerText = Array.from(strongTags).map(st => st.innerText);
+                    return innerText
+                });
+                await use (strongTagsInnerText);
+        },
+    
+        getListTagsInnerText: async ({ getUrl }: { getUrl: GetUrlFunction}, use: (string: string[]) => Promise<void>) => {
+            const listTagsInnerText = await getUrl.evaluate(() => {
+                    const listTags = document.querySelectorAll('li');
+                    const innerText = Array.from(listTags).map(li => li.innerText);
+                    return innerText
+                });
+                await use (listTagsInnerText);
+        },
 });
