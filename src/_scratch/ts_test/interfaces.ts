@@ -1,12 +1,15 @@
 import { Page } from 'playwright';
 
+// Refs all interfaces for fixtures, unit tests
 interface TestExtensions {
     expect: PlaywrightTest.Expect;
     test: PlaywrightTest.Test;
     getUrl: GetUrlFunction;
     aTagsHrefs: GetATagsHrefsFunction;
+    printImgTagHrefs: PrintImgTagHrefsFunction;
 }
 
+// Begin Fixture Interfaces
 export interface GetUrlFunction {
     (params: { page: Page }, use: (page: Page) => Promise<void>): Promise<void>;
     $$eval(selector: string, pageFunction: (elements: HTMLElement[]) => Object[]): Promise<any>;
@@ -22,14 +25,10 @@ export interface GetATagsHrefsFunction {
     (params: { aTags: string[] }): Promise<string[]>;
 }
 
-interface TestStateExtension {
-    getUrl: (page: Page, use: (page: Page) => Promise<void>) => Promise<void>;
-    aTagsHrefs: (context: TestContext,) => Promise<void>;
-}
 
-interface TestContext {
-    // page: PlaywrightPage.Page;
-    // use: PlaywrightPage.Use;
+// Begin Unit Test Interfaces
+export interface PrintImgTagHrefsFunction {
+    (params: {jsObject: Object}): Promise<Object>;
 }
 
 interface PlaywrightTest {
@@ -37,30 +36,39 @@ interface PlaywrightTest {
     Test: TestWithExtend;
 }
 
+// Can output extra logic for existing interfaces (?)
 interface TestWithExtend {
     extend: (extensions: { [key: string]: Function}) => void;
 }
 
-declare module '@playwright/test' {
-    interface TestState extends TestStateExtension{}
-}
-
 declare global {
-    // namespace PlaywrightPage {
-    //     interface Page{}
-    //     interface Use{
-    //     }
-    // }
-
     namespace PlaywrightTest {
         interface Expect {
-            // Specific "Expect" code
+            // Expect code (if needed)
         }
 
         interface Test {
-            // Specific "Test" code
+            // Test code (if needed)
         }
     }
 }
 
-export { TestExtensions, TestStateExtension, TestContext };
+// Export interfaces
+export { TestExtensions };
+
+//
+// ==============================================================================
+
+// interface TestContext {
+//     // page: PlaywrightPage.Page;
+//     // use: PlaywrightPage.Use;
+// }
+
+// interface TestStateExtension {
+//     getUrl: (page: Page, use: (page: Page) => Promise<void>) => Promise<void>;
+//     aTagsHrefs: (context: TestContext,) => Promise<void>;
+// }
+
+// declare module '@playwright/test' {
+//     interface TestState extends TestStateExtension{}
+// }
