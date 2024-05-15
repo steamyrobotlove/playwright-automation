@@ -10,7 +10,8 @@ const test_1 = require("@playwright/test");
  * See https://playwright.dev/docs/test-configuration.
  */
 exports.default = (0, test_1.defineConfig)({
-    testDir: './src/tests',
+    testDir: './tests_examples',
+    testMatch: '*spec.ts',
     /* Run tests in files in parallel */
     fullyParallel: true,
     /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -20,8 +21,7 @@ exports.default = (0, test_1.defineConfig)({
     /* Opt out of parallel tests on CI. */
     workers: process.env.CI ? 1 : undefined,
     /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-    // reporter: 'html',
-    reporter: process.env.CI ? 'html' : 'line',
+    reporter: 'html',
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
         /* Base URL to use in actions like `await page.goto('/')`. */
@@ -29,7 +29,6 @@ exports.default = (0, test_1.defineConfig)({
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: 'on-first-retry',
     },
-    timeout: 0,
     /* Configure projects for major browsers */
     projects: [
         {
@@ -70,3 +69,4 @@ exports.default = (0, test_1.defineConfig)({
     //   reuseExistingServer: !process.env.CI,
     // },
 });
+//# sourceMappingURL=playwright.config.js.map

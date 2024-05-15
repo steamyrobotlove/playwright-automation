@@ -10,12 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const test_1 = require("@playwright/test");
-(0, test_1.test)('has title', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+(0, test_1.test)('has title', (_a) => __awaiter(void 0, [_a], void 0, function* ({ page }) {
     yield page.goto('https://playwright.dev/');
     // Expect a title "to contain" a substring.
     yield (0, test_1.expect)(page).toHaveTitle(/Playwright/);
 }));
-(0, test_1.test)('get started link', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+(0, test_1.test)('get started link', (_b) => __awaiter(void 0, [_b], void 0, function* ({ page }) {
     yield page.goto('https://playwright.dev/');
     // Click the get started link.
     yield page.getByRole('link', { name: 'Get started' }).click();

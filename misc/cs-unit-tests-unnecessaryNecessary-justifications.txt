@@ -1,0 +1,25 @@
+QA BOT 2.0 SCRIPTS, C# SCRIPTS UNNECESSARY
+==========================================
+
+LINK CHECKS:
+HybridGasLinkVerification				// SPECIFIC LINK DESTINATION CHECK, CAN BE COUPLED WITH OTHER LINK DESTINATION CHECKS
+AllAccessoryPageLinks					// SPECIFIC LINK DESTINATION CHECK, CAN BE COUPLED WITH OTHER LINK DESTINATION CHECKS
+URLTargetValue							// Checks "target" attribute value of all links, already covered by fixture "aTagsNoRedirectTargets"
+WacTrackingParameters					// Checks URL parameters for WAC tracking, will be covered by fixture "aTagsRedirectCheckUrlParameters"
+LogoExistsWithRightLink					// SPECIFIC LINK DESTINATION CHECK, CAN BE COUPLED WITH OTHER LINK DESTINATION CHECKS
+AllSurveyLinksTarget					// SPECIFIC LINK DESTINATION CHECK, CAN BE COUPLED WITH OTHER LINK DESTINATION CHECKS, checks survey links for same final destination url
+--if (unit_test == "All survey links lead to the same target"){    var taskSurvey = AllSurveyLinksTarget(webViewHTML);    taskSurvey.Wait();    (bool value, string item, string itemValue) survey = taskSurvey.Result;    return survey;}
+
+IMAGE CHECKS:
+GetHeaderLogo							// Checks for existence of header logo, should be covered in to-be-written image-check script (check for existence of correct images based on some criteria--class attr, name attr, href value of associated <a> tag, etc.)
+AudioMultiMediaHero						// From old program, checks for Owner Welcome param and vehicle name in url
+TrackingPixels							// Looks for tracking pixels, going to make a fixture
+RightHeroBgIsPopulated					// Image check, checks SC/Next Car emails (I think) for the ‘mobile-se-bg’ class in the first <td> found; contains bg image, checks if bg image name contains “park,” “desert,” or “city, 'and also compares against vehicle in “ft_v1” in decodedUrl (which is the PL), contained within the source.
+HeroImagesAreScrolling					// Checks if hero images are animated/scrolling, only for emais with a <div class="carousel">, probably only off-lease
+--if (unit_test == "Hero images are scrolling"){    var taskHeros = HeroImgesAreScrolling(webViewHTML);    taskHeros.Wait();    (bool value, string item, string itemValue) heros = taskHeros.Result;    return heros;}
+HeroBackgroundIsGif						//Checks if hero background where <td class="mobile-se-bg"> is a gif, similar to HeroImagesAreScrolling
+--if (unit_test == "Hero background is a gif"){    var result = HeroBackgroundIsGif(webViewHTML);    result.Wait();    (bool value, string item, string itemValue) res = result.Result;    return res;}
+
+COPY CHECKS:
+NewOwnerNewsLetterTitle					// Checks for New Owner title in where URL params "profile=newowner" and "welcome=true" exist, think this is from OW2.9. Seems very small, removing unless someone says otherwise
+CorrectSubjectLine						// Checks subject line but only for those with “Special Offers Just Ahead” or “Your Perfect [MY] [Model Name] Awaits” in them. Keeping, but need to expand functionality/split checks into “email campaign check” => “SL check” or something.
