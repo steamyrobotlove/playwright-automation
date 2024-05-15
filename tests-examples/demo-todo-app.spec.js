@@ -10,7 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const test_1 = require("@playwright/test");
+<<<<<<< HEAD
 test_1.test.beforeEach((_a) => __awaiter(void 0, [_a], void 0, function* ({ page }) {
+=======
+test_1.test.beforeEach(({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
     yield page.goto('https://demo.playwright.dev/todomvc');
 }));
 const TODO_ITEMS = [
@@ -19,7 +23,11 @@ const TODO_ITEMS = [
     'book a doctors appointment'
 ];
 test_1.test.describe('New Todo', () => {
+<<<<<<< HEAD
     (0, test_1.test)('should allow me to add todo items', (_a) => __awaiter(void 0, [_a], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should allow me to add todo items', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         // create a new todo locator
         const newTodo = page.getByPlaceholder('What needs to be done?');
         // Create 1st todo.
@@ -39,7 +47,11 @@ test_1.test.describe('New Todo', () => {
         ]);
         yield checkNumberOfTodosInLocalStorage(page, 2);
     }));
+<<<<<<< HEAD
     (0, test_1.test)('should clear text input field when an item is added', (_b) => __awaiter(void 0, [_b], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should clear text input field when an item is added', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         // create a new todo locator
         const newTodo = page.getByPlaceholder('What needs to be done?');
         // Create one todo item.
@@ -49,7 +61,11 @@ test_1.test.describe('New Todo', () => {
         yield (0, test_1.expect)(newTodo).toBeEmpty();
         yield checkNumberOfTodosInLocalStorage(page, 1);
     }));
+<<<<<<< HEAD
     (0, test_1.test)('should append new items to the bottom of the list', (_c) => __awaiter(void 0, [_c], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should append new items to the bottom of the list', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         // Create 3 items.
         yield createDefaultTodos(page);
         // create a todo count locator
@@ -65,6 +81,7 @@ test_1.test.describe('New Todo', () => {
     }));
 });
 test_1.test.describe('Mark all as completed', () => {
+<<<<<<< HEAD
     test_1.test.beforeEach((_a) => __awaiter(void 0, [_a], void 0, function* ({ page }) {
         yield createDefaultTodos(page);
         yield checkNumberOfTodosInLocalStorage(page, 3);
@@ -73,13 +90,27 @@ test_1.test.describe('Mark all as completed', () => {
         yield checkNumberOfTodosInLocalStorage(page, 3);
     }));
     (0, test_1.test)('should allow me to mark all items as completed', (_c) => __awaiter(void 0, [_c], void 0, function* ({ page }) {
+=======
+    test_1.test.beforeEach(({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+        yield createDefaultTodos(page);
+        yield checkNumberOfTodosInLocalStorage(page, 3);
+    }));
+    test_1.test.afterEach(({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+        yield checkNumberOfTodosInLocalStorage(page, 3);
+    }));
+    (0, test_1.test)('should allow me to mark all items as completed', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         // Complete all todos.
         yield page.getByLabel('Mark all as complete').check();
         // Ensure all todos have 'completed' class.
         yield (0, test_1.expect)(page.getByTestId('todo-item')).toHaveClass(['completed', 'completed', 'completed']);
         yield checkNumberOfCompletedTodosInLocalStorage(page, 3);
     }));
+<<<<<<< HEAD
     (0, test_1.test)('should allow me to clear the complete state of all items', (_d) => __awaiter(void 0, [_d], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should allow me to clear the complete state of all items', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         const toggleAll = page.getByLabel('Mark all as complete');
         // Check and then immediately uncheck.
         yield toggleAll.check();
@@ -87,7 +118,11 @@ test_1.test.describe('Mark all as completed', () => {
         // Should be no completed classes.
         yield (0, test_1.expect)(page.getByTestId('todo-item')).toHaveClass(['', '', '']);
     }));
+<<<<<<< HEAD
     (0, test_1.test)('complete all checkbox should update state when items are completed / cleared', (_e) => __awaiter(void 0, [_e], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('complete all checkbox should update state when items are completed / cleared', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         const toggleAll = page.getByLabel('Mark all as complete');
         yield toggleAll.check();
         yield (0, test_1.expect)(toggleAll).toBeChecked();
@@ -104,7 +139,11 @@ test_1.test.describe('Mark all as completed', () => {
     }));
 });
 test_1.test.describe('Item', () => {
+<<<<<<< HEAD
     (0, test_1.test)('should allow me to mark items as complete', (_a) => __awaiter(void 0, [_a], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should allow me to mark items as complete', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         // create a new todo locator
         const newTodo = page.getByPlaceholder('What needs to be done?');
         // Create two items.
@@ -124,7 +163,11 @@ test_1.test.describe('Item', () => {
         yield (0, test_1.expect)(firstTodo).toHaveClass('completed');
         yield (0, test_1.expect)(secondTodo).toHaveClass('completed');
     }));
+<<<<<<< HEAD
     (0, test_1.test)('should allow me to un-mark items as complete', (_b) => __awaiter(void 0, [_b], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should allow me to un-mark items as complete', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         // create a new todo locator
         const newTodo = page.getByPlaceholder('What needs to be done?');
         // Create two items.
@@ -144,7 +187,11 @@ test_1.test.describe('Item', () => {
         yield (0, test_1.expect)(secondTodo).not.toHaveClass('completed');
         yield checkNumberOfCompletedTodosInLocalStorage(page, 0);
     }));
+<<<<<<< HEAD
     (0, test_1.test)('should allow me to edit an item', (_c) => __awaiter(void 0, [_c], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should allow me to edit an item', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         yield createDefaultTodos(page);
         const todoItems = page.getByTestId('todo-item');
         const secondTodo = todoItems.nth(1);
@@ -162,11 +209,19 @@ test_1.test.describe('Item', () => {
     }));
 });
 test_1.test.describe('Editing', () => {
+<<<<<<< HEAD
     test_1.test.beforeEach((_a) => __awaiter(void 0, [_a], void 0, function* ({ page }) {
         yield createDefaultTodos(page);
         yield checkNumberOfTodosInLocalStorage(page, 3);
     }));
     (0, test_1.test)('should hide other controls when editing', (_b) => __awaiter(void 0, [_b], void 0, function* ({ page }) {
+=======
+    test_1.test.beforeEach(({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+        yield createDefaultTodos(page);
+        yield checkNumberOfTodosInLocalStorage(page, 3);
+    }));
+    (0, test_1.test)('should hide other controls when editing', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         const todoItem = page.getByTestId('todo-item').nth(1);
         yield todoItem.dblclick();
         yield (0, test_1.expect)(todoItem.getByRole('checkbox')).not.toBeVisible();
@@ -175,7 +230,11 @@ test_1.test.describe('Editing', () => {
         })).not.toBeVisible();
         yield checkNumberOfTodosInLocalStorage(page, 3);
     }));
+<<<<<<< HEAD
     (0, test_1.test)('should save edits on blur', (_c) => __awaiter(void 0, [_c], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should save edits on blur', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         const todoItems = page.getByTestId('todo-item');
         yield todoItems.nth(1).dblclick();
         yield todoItems.nth(1).getByRole('textbox', { name: 'Edit' }).fill('buy some sausages');
@@ -187,7 +246,11 @@ test_1.test.describe('Editing', () => {
         ]);
         yield checkTodosInLocalStorage(page, 'buy some sausages');
     }));
+<<<<<<< HEAD
     (0, test_1.test)('should trim entered text', (_d) => __awaiter(void 0, [_d], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should trim entered text', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         const todoItems = page.getByTestId('todo-item');
         yield todoItems.nth(1).dblclick();
         yield todoItems.nth(1).getByRole('textbox', { name: 'Edit' }).fill('    buy some sausages    ');
@@ -199,7 +262,11 @@ test_1.test.describe('Editing', () => {
         ]);
         yield checkTodosInLocalStorage(page, 'buy some sausages');
     }));
+<<<<<<< HEAD
     (0, test_1.test)('should remove the item if an empty text string was entered', (_e) => __awaiter(void 0, [_e], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should remove the item if an empty text string was entered', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         const todoItems = page.getByTestId('todo-item');
         yield todoItems.nth(1).dblclick();
         yield todoItems.nth(1).getByRole('textbox', { name: 'Edit' }).fill('');
@@ -209,7 +276,11 @@ test_1.test.describe('Editing', () => {
             TODO_ITEMS[2],
         ]);
     }));
+<<<<<<< HEAD
     (0, test_1.test)('should cancel edits on escape', (_f) => __awaiter(void 0, [_f], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should cancel edits on escape', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         const todoItems = page.getByTestId('todo-item');
         yield todoItems.nth(1).dblclick();
         yield todoItems.nth(1).getByRole('textbox', { name: 'Edit' }).fill('buy some sausages');
@@ -218,7 +289,11 @@ test_1.test.describe('Editing', () => {
     }));
 });
 test_1.test.describe('Counter', () => {
+<<<<<<< HEAD
     (0, test_1.test)('should display the current number of todo items', (_a) => __awaiter(void 0, [_a], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should display the current number of todo items', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         // create a new todo locator
         const newTodo = page.getByPlaceholder('What needs to be done?');
         // create a todo count locator
@@ -233,6 +308,7 @@ test_1.test.describe('Counter', () => {
     }));
 });
 test_1.test.describe('Clear completed button', () => {
+<<<<<<< HEAD
     test_1.test.beforeEach((_a) => __awaiter(void 0, [_a], void 0, function* ({ page }) {
         yield createDefaultTodos(page);
     }));
@@ -241,20 +317,38 @@ test_1.test.describe('Clear completed button', () => {
         yield (0, test_1.expect)(page.getByRole('button', { name: 'Clear completed' })).toBeVisible();
     }));
     (0, test_1.test)('should remove completed items when clicked', (_c) => __awaiter(void 0, [_c], void 0, function* ({ page }) {
+=======
+    test_1.test.beforeEach(({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+        yield createDefaultTodos(page);
+    }));
+    (0, test_1.test)('should display the correct text', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+        yield page.locator('.todo-list li .toggle').first().check();
+        yield (0, test_1.expect)(page.getByRole('button', { name: 'Clear completed' })).toBeVisible();
+    }));
+    (0, test_1.test)('should remove completed items when clicked', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         const todoItems = page.getByTestId('todo-item');
         yield todoItems.nth(1).getByRole('checkbox').check();
         yield page.getByRole('button', { name: 'Clear completed' }).click();
         yield (0, test_1.expect)(todoItems).toHaveCount(2);
         yield (0, test_1.expect)(todoItems).toHaveText([TODO_ITEMS[0], TODO_ITEMS[2]]);
     }));
+<<<<<<< HEAD
     (0, test_1.test)('should be hidden when there are no items that are completed', (_d) => __awaiter(void 0, [_d], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should be hidden when there are no items that are completed', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         yield page.locator('.todo-list li .toggle').first().check();
         yield page.getByRole('button', { name: 'Clear completed' }).click();
         yield (0, test_1.expect)(page.getByRole('button', { name: 'Clear completed' })).toBeHidden();
     }));
 });
 test_1.test.describe('Persistence', () => {
+<<<<<<< HEAD
     (0, test_1.test)('should persist its data', (_a) => __awaiter(void 0, [_a], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should persist its data', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         // create a new todo locator
         const newTodo = page.getByPlaceholder('What needs to be done?');
         for (const item of TODO_ITEMS.slice(0, 2)) {
@@ -277,14 +371,22 @@ test_1.test.describe('Persistence', () => {
     }));
 });
 test_1.test.describe('Routing', () => {
+<<<<<<< HEAD
     test_1.test.beforeEach((_a) => __awaiter(void 0, [_a], void 0, function* ({ page }) {
+=======
+    test_1.test.beforeEach(({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         yield createDefaultTodos(page);
         // make sure the app had a chance to save updated todos in storage
         // before navigating to a new view, otherwise the items can get lost :(
         // in some frameworks like Durandal
         yield checkTodosInLocalStorage(page, TODO_ITEMS[0]);
     }));
+<<<<<<< HEAD
     (0, test_1.test)('should allow me to display active items', (_b) => __awaiter(void 0, [_b], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should allow me to display active items', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         const todoItem = page.getByTestId('todo-item');
         yield page.getByTestId('todo-item').nth(1).getByRole('checkbox').check();
         yield checkNumberOfCompletedTodosInLocalStorage(page, 1);
@@ -292,7 +394,11 @@ test_1.test.describe('Routing', () => {
         yield (0, test_1.expect)(todoItem).toHaveCount(2);
         yield (0, test_1.expect)(todoItem).toHaveText([TODO_ITEMS[0], TODO_ITEMS[2]]);
     }));
+<<<<<<< HEAD
     (0, test_1.test)('should respect the back button', (_c) => __awaiter(void 0, [_c], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should respect the back button', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         const todoItem = page.getByTestId('todo-item');
         yield page.getByTestId('todo-item').nth(1).getByRole('checkbox').check();
         yield checkNumberOfCompletedTodosInLocalStorage(page, 1);
@@ -312,13 +418,21 @@ test_1.test.describe('Routing', () => {
         yield page.goBack();
         yield (0, test_1.expect)(todoItem).toHaveCount(3);
     }));
+<<<<<<< HEAD
     (0, test_1.test)('should allow me to display completed items', (_d) => __awaiter(void 0, [_d], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should allow me to display completed items', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         yield page.getByTestId('todo-item').nth(1).getByRole('checkbox').check();
         yield checkNumberOfCompletedTodosInLocalStorage(page, 1);
         yield page.getByRole('link', { name: 'Completed' }).click();
         yield (0, test_1.expect)(page.getByTestId('todo-item')).toHaveCount(1);
     }));
+<<<<<<< HEAD
     (0, test_1.test)('should allow me to display all items', (_e) => __awaiter(void 0, [_e], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should allow me to display all items', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         yield page.getByTestId('todo-item').nth(1).getByRole('checkbox').check();
         yield checkNumberOfCompletedTodosInLocalStorage(page, 1);
         yield page.getByRole('link', { name: 'Active' }).click();
@@ -326,7 +440,11 @@ test_1.test.describe('Routing', () => {
         yield page.getByRole('link', { name: 'All' }).click();
         yield (0, test_1.expect)(page.getByTestId('todo-item')).toHaveCount(3);
     }));
+<<<<<<< HEAD
     (0, test_1.test)('should highlight the currently applied filter', (_f) => __awaiter(void 0, [_f], void 0, function* ({ page }) {
+=======
+    (0, test_1.test)('should highlight the currently applied filter', ({ page }) => __awaiter(void 0, void 0, void 0, function* () {
+>>>>>>> 83b159aeda454e1a49296d081abc5dee015c2df3
         yield (0, test_1.expect)(page.getByRole('link', { name: 'All' })).toHaveClass('selected');
         //create locators for active and completed links
         const activeLink = page.getByRole('link', { name: 'Active' });
