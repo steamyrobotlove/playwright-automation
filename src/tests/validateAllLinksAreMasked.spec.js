@@ -1,6 +1,6 @@
-const { test, expect } = require('../fixtures/fixtures');
+import { test } from '../fixtures/fixtures';
 
-test('Verify all links are masked', async ({ page, aTagsHrefs }) => {
+test('Verify all links are masked', async ({ aTagsHrefs }) => {
     const hrefsArray = Object.values(aTagsHrefs);
     let hrefs = [];
 

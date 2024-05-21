@@ -1,4 +1,4 @@
-const { test, expect } = require('../fixtures/fixtures');
+import { test } from '../fixtures/fixtures';
 
 test('Validate target attributes', async ({ aTagsHrefs, aTagsNoRedirectTargets }) => {
     const hrefs = Object.values(aTagsHrefs);

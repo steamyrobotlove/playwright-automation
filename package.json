@@ -8,11 +8,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "playwright": "^1.42.1",
-    "typescript": "^5.4.3"
+    "cheerio": "^1.0.0-rc.12",
+    "playwright": "^1.44.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.43.1",
-    "@types/node": "^20.12.3"
+    "@playwright/test": "^1.44.0",
+    "@types/node": "^20.12.12"
   }
 }
