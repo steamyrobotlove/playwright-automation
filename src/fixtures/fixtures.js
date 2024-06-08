@@ -122,4 +122,16 @@ exports.test = test.extend({
         });
         await use (listTagsInnerText);
     },
+
+    // Fixture for getting destination url, tdesc parameter value for all hrefs in page
+    getTdescValue: async ({ getPage }, use) => {
+        const tdescVal = async (href) => {
+            await getUrl.goto(href, { waitUntil: 'load', timeout: 0 });
+            const url = getUrl.url();
+            console.log(url);
+            const searchparam = new URLSearchParams(new URL(url).search);
+            return searchparam.get('tdesc');
+        }
+        use(tdescVal);
+    },
 });
