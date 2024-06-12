@@ -1,54 +1,40 @@
-const { test, expect } = require('../fixtures/fixtures');
+const { test } = require('../fixtures/fixtures');
 const Typo = require('typo-js');
 const dictionary = new Typo('en_US');
 
-const isNotWord = (word) => {
-    return /^\d+$/.test(word) || /^[^\w]+$/.test(word) || word.length < 3;
-};
+test('Spellcheck', async ({ getPTagsInnerText}) => {
+    const pTagsInnerText = Object.values(getPTagsInnerText);
+    let misspelled = [];
 
-const hasWord = (text) => {
-    return /\w/.test(text);
-};
+    const regexNoNewLines = /<br>|[\n\r\n]/g;
+    const regexEntities = /&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-fA-F]{1,6});/ig;
+    const regexSpaces = /\s+/g;
+    const regexPunctuation = /[!"#$%&'()*+,./:;<=>?@[\\\]^_`{|}~]/g;
+    const regexNumbers = /\d+/g;
 
-test('Spellcheck', async ({ getPTagsInnerText }) => {
-    const pTagsInnerText = Object.values(getPTagsInnerText).flat();
-    const misspelledWords = pTagsInnerText.reduce((acc, text) => {
-        if (!hasWord(text)) {
-            return acc;
-        }
+    for (let text of pTagsInnerText) {
+        const splitWords = text.split(/[^a-zA-Z0-9]+/).map(string => {
+            let replaceNewLines = string.replace(regexNoNewLines, ' ');
+            let replaceSpaces = replaceNewLines.replace(regexSpaces, ' ');
+            let replacePunctuation = replaceSpaces.replace(regexPunctuation, ' ');
+            let replaceEntities = replacePunctuation.replace(regexEntities, ' ');
+            let replaceNumbers = replaceEntities.replace(regexNumbers, '');
+            return replaceNumbers;
+        });
 
-        const words = text.split(' ').map(word => {
-            if (isNotWord(word)) {
-                return word;
+        for (let word of splitWords) {
+            let spellcheck = dictionary.check(word);
+
+            if (spellcheck==false && word.length > 1) {
+                misspelled.push(word);
             }
-            return !dictionary.check(word) ? word : '';
-        }).filter(Boolean);
+        }
+    };
 
-        return [...acc, ...words];
-    }, []);
-
-    console.log(misspelledWords);
+    const filtered = misspelled.filter(el => el);
+    if (filtered.length >= 1) {
+        console.log("The following misspellings were found: " + filtered);
+    } else {
+        console.log('No misspellings found');
+    }
 });
-
-// Previous n00b code
-    // const pTagsInnerText = Object.values(getPTagsInnerText);
-    // let misspelled = [];
-
-    // for (let array of pTagsInnerText) {
-    //     let text = array.split(' ');
-
-    //     for (let str of text) {
-    //         let words = str.split(' ');
-
-    //         for (let word of words) {
-    //             let spellcheck = dictionary.check(word);
-
-    //             if (spellcheck == false) {
-    //                 misspelled.push(word);
-    //             } else {
-    //                 continue;
-    //             }
-    //         }
-    //     }
-    // }
-    // console.log(misspelled);
