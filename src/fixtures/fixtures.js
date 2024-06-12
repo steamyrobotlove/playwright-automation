@@ -126,12 +126,12 @@ exports.test = test.extend({
     // Fixture for getting destination url, tdesc parameter value for all hrefs in page
     getTdescValue: async ({ getPage }, use) => {
         const tdescVal = async (href) => {
-            await getUrl.goto(href, { waitUntil: 'load', timeout: 0 });
-            const url = getUrl.url();
+            await getPage.goto(href, { waitUntil: 'load', timeout: 0 });
+            const url = getPage.url();
             console.log(url);
             const searchparam = new URLSearchParams(new URL(url).search);
             return searchparam.get('tdesc');
         }
-        use(tdescVal);
+        await use(tdescVal);
     },
 });
