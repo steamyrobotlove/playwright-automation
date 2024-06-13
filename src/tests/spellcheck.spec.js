@@ -33,7 +33,7 @@ test('Spellcheck', async ({ getPTagsInnerText}) => {
 
     const filtered = misspelled.filter(el => el);
     if (filtered.length >= 1) {
-        console.log("The following misspellings were found: " + filtered);
+        console.table(filtered); //The following misspellings were found: " +
     } else {
         console.log('No misspellings found');
     }
