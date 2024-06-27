@@ -14,7 +14,7 @@ test('Verify all links are masked', async ({ aTagsHrefs }) => {
     }
 
     for (let href of hrefs) {
-        if (href && !href == '') {
+        if (href && href !== '') {
             if (href.includes('click.e.toyota.com')) {
                 console.log(`The url ${href} is masked with click.e.toyota.com`);
             } else if (href.includes("click.lexuscommunications.net")) {
