@@ -9,7 +9,7 @@ test("Spellcheck", async ({ getStrongTagsInnerText }) => {
     let misspelled = [];
 
     // import exempt.txt for exemption list
-    const exemptions = await fs.readFileSync('./src/static/exempt.txt', 'utf-8').toString().toLowerCase();
+    const exemptions = await fs.readFileSync('./static/exempt.txt', 'utf-8').toString().toLowerCase();
 
     const regexNoNewLines = /<br>|[\n\r\n]/g;
     const regexEntities = /&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-fA-F]{1,6});/gi;
