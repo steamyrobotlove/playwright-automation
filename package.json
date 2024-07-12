@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Playwright automation library for QA Bot 2.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "npx playwright test"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
