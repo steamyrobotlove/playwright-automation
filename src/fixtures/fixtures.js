@@ -68,13 +68,31 @@ exports.test = test.extend({
     },
 
     // Begin img tags section
-    imgTagsSrcs: async ({ getPage }, use) => {
+    getImgTags: async ({ getPage }, use) => {
+        const imgTags = await getPage.$$eval('img',() => {
+            const tags = document.querySelectorAll('img');
+            const imgs = Array.from(tags).map(img => img.outerHTML);
+            return imgs;
+        })
+        await use(imgTags);
+    },
+
+    getImgTagsSrcs: async ({ getPage }, use) => {
         const imgHrefs = await getPage.evaluate(() => {
             const tags = document.querySelectorAll('img');
             const hrefs = Array.from(tags).map(img => img.src);
             return hrefs;
         });
         await use(imgHrefs);
+    },
+
+    getImgTagsAlts: async ({ getPage }, use) => {
+        const imgAlts = await getPage.evaluate(() => {
+            const tags = document.querySelectorAll('img');
+            const alts = Array.from(tags).map(img => img.alt);
+            return alts;
+        });
+        await use(imgAlts);
     },
 
     // Begin inner text (copy) section
