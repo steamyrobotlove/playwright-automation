@@ -16,19 +16,20 @@ test.describe('Validate images', () => {
         const trackingPixels = ['emltrk', 'emanalytics', 'ffcb10', 'two50'];
         let trackingPixelCount = 0;
     
+        // Check for tracking pixels
         if (srcs.length !== 0) {
             for (let src of srcs) {
                 if (trackingPixels.some((el) => src.includes(el))){
                     results.testItems.push(`${src} is a tracking pixel`);
                     trackingPixelCount++;
+
+                // If not pixel check status codes
                 } else if (src != '') {
                     const response = await page.goto(src, { waitUntil: 'load', timeout: 0 });
                     const status = response?.status();        
                     if (status !== 200) {
                         results.testItems.push(`❌ ERROR: status of ${src} is ${status}`);
                     }
-                } else {
-                    continue;
                 }
             }
         } else {
@@ -111,10 +112,10 @@ test.describe('Validate images', () => {
         console.log(results);
     });
 
-    test('Image-link check', async ({ getUrl }) => {
+    test('Image-link check', async ({ getPage }) => {
         results.testName = 'Image-link check';
 
-        const imgLinks = await getUrl.evaluate(() => {
+        const imgLinks = await getPage.evaluate(() => {
             const imgTags = document.querySelectorAll('img');
             const imgArray = Array.from(imgTags).map(img => ({
                 src: img.src,
