@@ -1,47 +1,71 @@
 const { test, expect } = require('../fixtures/fixtures');
+import { TestResults } from '../models/test-results';
+
+let results = new TestResults();
+results.testName = '';
+results.testStatus = 'failed';
+results.testMessage = '';
+results.testItems = [];
 
 test.describe('Link validation tests', () => {
     test('Validate Link Responses', async ({ page, aTagsHrefs }) => {
+        results.testName = 'Link validation tests';
+        test.slow();
+
         const hrefs = Object.values(aTagsHrefs);
+        const status = [];
         for (let href of hrefs) {
             if (href && href !== "") {
                 const response = await page.goto(href, { waitUntil: 'load', timeout: 0 });
-                const status = response?.status();
-                
-                const result = status == 200 ? `Status of ${href} is ${status}` : `Status of ${href} was weird: ${status}`;
-                console.log(result);
+                status.push(response?.status());
             }
         }
+        
+        for (let i = 0; i < hrefs.length; i++) {
+            if (status[i] !== 200 && status[i] !== 302) {
+                results.testItems.push('❌ STATUS: ' + status[i] + '\n HREF: ' + hrefs[i]);
+            }
+        }
+        
+        if (results.testItems.length !== 0) {
+            results.testStatus;
+            results.testMessage = 'Some links are not resolving';
+        } else {
+            results.testStatus = 'passed';
+            results.testMessage = '✅ All links are resolving';
+        }
+        console.log(results);
     });
 
     test('Validate aliases', async ({ aTagsNoRedirectAliases }) => {
+        results.testName = 'Validate aliases';
         const aliases = Object.values(aTagsNoRedirectAliases);
+        const regex = /_/g;
+
         for (let alias of aliases) {
-            const charToCount = "_";
-            const regex = new RegExp(charToCount, 'g');
             const count = alias.match(regex)?.length;
-            console.log(count);
-            if (!count === undefined && count == 11 || !alias.includes("footer")) {
-                console.log(`There are 11 underscores in ${alias}, so it's a main content link!`);
-            } else if (count == 11 && alias.includes("footer")){
-                console.log(`There are 11 underscores in ${alias}, and it's a footer link!`);            
-            } else if (count == 3) {
-                console.log(`There are 3 underscores in ${alias}, so this is a footer link.`);
-            } else if (count !== 3 && count !== 11 && !alias.includes("footer")) {
-                console.log(`This alias does not match the underscores conditional: ${alias}`);
-            } else {
-                console.log(`${alias} is undefined`)
+
+            if (![3, 11].includes(count) && !alias.includes("footer")) {
+                results.testItems.push(`❌ ${alias}`);
             }
-            // console.log(alias);
         }
+
+        if (results.testItems.length !== 0) {
+            results.testMessage = 'Some aliases are not valid';
+        } else {
+            results.testStatus = 'passed';
+            results.testMessage = '✅ All aliases are valid';
+        }
+
+        console.log(results);
     });
 
     test('Validate target attributes', async ({ aTagsHrefs, aTagsNoRedirectTargets }) => {
+        results.testName = 'Validate target attributes';
         const hrefs = Object.values(aTagsHrefs);
         const targets = Object.values(aTagsNoRedirectTargets);
 
-        // Remove empty a tag from hrefs
-        let newHrefs = hrefs.filter(function(el) {
+        let newHrefs = hrefs.filter((el) => {
             return el != "";
         });
 
@@ -49,18 +73,29 @@ test.describe('Link validation tests', () => {
         for (let i = 0; i < newHrefs.length; i++) {
             const valueHref = newHrefs[i];
             const valueTarget = targets[i];
-            if (valueTarget) {
-                console.log(`${valueHref} contains target=${valueTarget}`);
-            } else {
-                console.log(`***ERROR***: ${valueHref} DOES NOT CONTAIN _blank: ${valueTarget}`);
+
+            if (!valueTarget) {
+                // console.log(`${valueHref} contains target=${valueTarget}`);
+                results.testItems.push(`❌ ${valueHref}`);
             }
         }
+
+        if (results.testItems.length !== 0) {
+            results.testMessage = 'Some links do not have target attributes';
+        } else {
+            results.testStatus = 'passed';
+            results.testMessage = '✅ All links have target attributes';
+        }
+
+        console.log(results);
     });
 
     test('Verify all links are masked', async ({ aTagsHrefs }) => {
+        results.testName = 'Verify all links are masked';
+        test.slow();
+
         const hrefsArray = Object.values(aTagsHrefs);
         let hrefs = [];
-
         for (let link of hrefsArray) {
             if (!link.includes('view.e.toyota.com')) {
                 let value = link.toLowerCase();
@@ -69,56 +104,38 @@ test.describe('Link validation tests', () => {
                 continue;
             }
         }
-
         for (let href of hrefs) {
             if (href && href !== '') {
-                if (href.includes('click.e.toyota.com')) {
-                    console.log(`The url ${href} is masked with click.e.toyota.com`);
-                } else if (href.includes("click.lexuscommunications.net")) {
-                    console.log(`The url ${href} is masked with click.lexuscommunications.net`);
-                } else if (href.includes("click.email.mazdafinancialservices.com")) {
-                    console.log(`The url ${href} is masked with click.email.mazdafinancialservices.com`);
-                } else if (!href.includes('click.e.toyota.com') && !href.includes("click.lexuscommunications.net") && !href.includes("click.email.mazdafinancialservices.com")){
-                    console.log(`The url ${href} is not masked for any known environment`);
-                } else {
-                    console.log(`This url is weird: ${href}`);
+                if (!href.includes('click.e.toyota.com') && !href.includes("click.lexuscommunications.net") && !href.includes("click.email.mazdafinancialservices.com")) {
+                    results.testItems.push(`❌ ${href}`);
                 }
             }
-        }        
-    });
-
-    // Removed page and getUrl arguments, don't need to pass any browser/page element
-    // Other fixtures already use getUrl to get browser instance, can just grab any other fixture that has the data you need :)
-    test('validate tdesc parameter', async ({ aTagsHrefs, getTdescValue}) => { 
-        test.setTimeout(0);
-
-        const hrefs = Object.values(aTagsHrefs);
-        // console.log(hrefs);
-
-        for(const href of hrefs){
-            // get tdesc value using getTdescValue fixture
-            const tdescv = await getTdescValue(href);
-            console.log('tdesc:', tdescv);
-
-            // get no. of underscores using underscoreCount function
-            // console.log('The no. of underscores: ',await underscoreCount(tdescv));
         }
-    })
+        
+        if (results.testItems.length !== 0) {
+            results.testMessage = 'Some links are not masked';
+        } else {
+            results.testStatus = 'passed';
+            results.testMessage = '✅ All links are masked';
+        }
+
+        console.log(results);
+    });
 });
 
-// Maybe this can be a fixture?
-// I've also created this logic in the validateAliases unit test, so maybe we can move that entire logic to a fixture! :D
-// const underscoreCount = async (str) => {
-//     let count = 0;
-//         try{
-//             for(let i=0; i<str.length; i++){
-//                 if(str.charAt(i) == '_'){
-//                     count += 1;
-//                 }
-//             }
-//             return count;
-//         }
-//         catch(err){
-//             console.log(err);
-//         }
-// }
+// TDESC FIXTURE, REFACTOR
+    // // Removed page and getUrl arguments, don't need to pass any browser/page element
+    // // Other fixtures already use getUrl to get browser instance, can just grab any other fixture that has the data you need :)
+    // test('validate tdesc parameter', async ({ aTagsHrefs, getTdescValue}) => { 
+    //     results.testName = 'Validate tdesc parameter';
+    //     test.slow();
+
+    //     const hrefs = Object.values(aTagsHrefs);
+
+    //     for(const href of hrefs){
+    //         const tdescv = await getTdescValue(href);
+
+    //         // get no. of underscores using underscoreCount function
+    //         // console.log('The no. of underscores: ',await underscoreCount(tdescv));
+    //     }
+    // });

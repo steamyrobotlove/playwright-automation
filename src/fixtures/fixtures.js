@@ -6,7 +6,9 @@ exports.test = test.extend({
     // Get static URL/browser page instance, change to dynamic later
     getPage: async ({ page }, use) => {
         await page.goto(
-            'https://qa-nextcar.rapp.com/tear-sheets/next-car/toyota/sales-conversion/convert/sc-convert-all-vehicles-sales-event/?FT_V1=2024~sienna~5410~~~03T3&FIRST_NAME_PERSONALIZATION=RAPP&MODEL_NAME=%5EocjVehicle%7CseriesName%7Creplace(%27Toyota%20%27,%27%27)%5E&FN_TRANSFORM=lowercase&whtToyLogo=0&grySocIco=1&DEALER_ZIP=19468&DISCLAIMER=&grylogo=1&MaxOffersLimit=1&sl=offer&pt=offer&previewText=offer&offer=1&DEALER_CD=37154&DEALER_NAME=Tri%20County%20Toyota&DEALER_ADDRESS=15%20D%20&%20L%20Drive&DEALER_CITY=Limerick&DEALER_STATE=PA&DEALER_URL=https://www.tricountytoyota.com/&DEALER_PHONE=610-495-4588&DEALER_SERVICE_URL=https://www.tricountytoyota.com/toyota-schedule-service/&touchName=convertvoihandraisers-se-sl1-nooffer', { waitUntil: 'load', timeout: 0 });
+            // 'https://qa-nextcar.rapp.com/tear-sheets/next-car/toyota/sales-conversion/convert/sc-convert-all-vehicles-sales-event/?FT_V1=2024~sienna~5410~~~03T3&FIRST_NAME_PERSONALIZATION=RAPP&MODEL_NAME=%5EocjVehicle%7CseriesName%7Creplace(%27Toyota%20%27,%27%27)%5E&FN_TRANSFORM=lowercase&whtToyLogo=0&grySocIco=1&DEALER_ZIP=19468&DISCLAIMER=&grylogo=1&MaxOffersLimit=1&sl=offer&pt=offer&previewText=offer&offer=1&DEALER_CD=37154&DEALER_NAME=Tri%20County%20Toyota&DEALER_ADDRESS=15%20D%20&%20L%20Drive&DEALER_CITY=Limerick&DEALER_STATE=PA&DEALER_URL=https://www.tricountytoyota.com/&DEALER_PHONE=610-495-4588&DEALER_SERVICE_URL=https://www.tricountytoyota.com/toyota-schedule-service/&touchName=convertvoihandraisers-se-sl1-nooffer', 
+            'https://view.e.toyota.com/?qs=1b760ffec4ac364e4ce00783464f2a6a728d32265e44b72ddb29e34fc21c6c2e1c5ad155b14f405905d24cfcdb50efb5202de46b2e7d0a7548bcfa6890c0da95b8ec486301753f5365888ac13d360745',
+            { waitUntil: 'load', timeout: 0 });
         await use(page);
     },
 
