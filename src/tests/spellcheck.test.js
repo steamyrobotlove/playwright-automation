@@ -1,7 +1,7 @@
 import Typo from "typo-js";
 import fs from 'fs';
 import { TestResults } from '../models/test-results';
-import { test } from "../fixtures/fixtures";
+import { test, expect } from "../fixtures/fixtures";
 const dictionary = new Typo("en_US");
 
 let results = new TestResults();
@@ -15,7 +15,7 @@ test("Spellcheck", async ({ getStrongTagsInnerText }) => {
     let misspelled = [];
 
     // import exempt.txt for exemption list
-    const exemptions = await fs.readFileSync('./static/exempt.txt', 'utf-8').toString().toLowerCase();
+    const exemptions = fs.readFileSync('./src/static/exempt.txt', 'utf-8').toString().toLowerCase();
     const regexNoNewLines = /<br>|[\n\r\n]/g;
     const regexEntities = /&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-fA-F]{1,6});/gi;
     const regexSpaces = /\s+/g;
@@ -37,20 +37,30 @@ test("Spellcheck", async ({ getStrongTagsInnerText }) => {
         for (let word of splitWords) {
             let spellcheck = dictionary.check(word);
             if (spellcheck == false && !exemptions.includes(word) && word.length > 1) {
-                misspelled.push('❌ ' + word);
+                misspelled.push('❌ ' + word + '\n');
             }
         }
     }
 
     const filtered = misspelled.filter((el) => el);
     if (filtered.length >= 1) {
-        results.testStatus;
         results.testMessage = 'Some spelling errors found';
         results.testItems = filtered;
+        test.info().annotations.push({
+            type: 'error',
+            description: results.testItems
+        })
     } else {
         results.testStatus = 'passed';
         results.testMessage = '✅ No spelling errors found';
     }
-    
+
+    await expect(results.testItems).toEqual({
+        testName: 'Spellcheck',
+        testStatus: 'passed',
+        testMessage: '✅ No spelling errors found',
+        testItems: []
+    });
+
     console.log(results);
 });
