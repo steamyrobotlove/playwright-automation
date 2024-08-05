@@ -1,4 +1,4 @@
-import { test } from '../fixtures/fixtures';
+import { test } from '../../fixtures/fixtures';
 
 test('Validate tdesc in redirected URL params', async ({ aTagsRedirectHrefs }) => {
     const urls = Object.values(aTagsRedirectHrefs);

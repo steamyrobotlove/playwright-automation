@@ -1,4 +1,4 @@
-import { test } from '../fixtures/fixtures';
+import { test } from '../../fixtures/fixtures';
 
 test('Get img tags', async ({ page, imgTagsSrcs }) => {
     const srcs = Object.values(imgTagsSrcs);

@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "Playwright automation library for QA Bot 2.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "npx playwright test"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.7.2",
     "cheerio": "^1.0.0-rc.12",
     "playwright": "^1.44.0",
     "typo-js": "^1.2.4"

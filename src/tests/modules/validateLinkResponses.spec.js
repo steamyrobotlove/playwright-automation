@@ -1,4 +1,4 @@
-import { test } from '../fixtures/fixtures';
+import { test } from '../../fixtures/fixtures';
 
 test('Validate Link Responses', async ({ page, aTagsHrefs }) => {
     const hrefs = Object.values(aTagsHrefs);

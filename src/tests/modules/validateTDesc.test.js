@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures/fixtures';
+import { test, expect } from '../../fixtures/fixtures';
 
 // Removed page and getUrl arguments, don't need to pass any browser/page element
 // Other fixtures already use getUrl to get browser instance, can just grab any other fixture that has the data you need :)

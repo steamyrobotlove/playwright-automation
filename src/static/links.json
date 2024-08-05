@@ -1,0 +1,42 @@
+[
+  {
+    "Text": "logo",
+    "Url": "https://www.toyota.com/camry/",
+    "alias": "next_t_rm_header_support_camrylogo_na_1_2_camry--logo_img_2550"
+  },
+  {
+    "Text": "CAMRY",
+    "Url": "https://www.toyota.com/camry/",
+    "alias": "next_t_rm_header_support_camrylogo_na_1_3_camry--logo_txt_2550"
+  },
+  {
+    "Text": "Terms and Conditions",
+    "Url": "https://www.toyota.com/support/legal-terms/",
+    "alias": "next_t_rm_support_na_na_5_3_terms--and--conditions_txt_7077"
+  },
+  {
+    "Text": "facebook icon",
+    "Url": "https://www.facebook.com/toyota",
+    "alias": "next_t_rm_social_support_facebook_na_6_1_facebook_ico_2289"
+  },
+  {
+    "Text": "youTube icon",
+    "Url": "https://www.youtube.com/user/ToyotaUSA",
+    "alias": "next_t_rm_social_support_youtube_na_6_2_youtube_ico"
+  },
+  {
+    "Text": "X icon",
+    "Url": "https://x.com/toyota",
+    "alias": "next_t_rm_social_support_x_na_6_3_x_ico_2289"
+  },
+  {
+    "Text": "pinterest icon",
+    "Url": "https://www.pinterest.com/toyotausa/",
+    "alias": "next_t_rm_social_support_pinterest_na_6_4_pinterest_ico_2289"
+  },
+  {
+    "Text": "instagram icon",
+    "Url": "https://www.instagram.com/toyotausa/",
+    "alias": "next_t_rm_social_support_instagram_na_6_5_instagram_ico_2289"
+  }
+]
